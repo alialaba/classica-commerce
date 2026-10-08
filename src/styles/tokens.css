@@ -1,0 +1,27 @@
+:root {
+  --color-bg:        #F3F0E9; /* warm off-white/cream — main page background */
+  --color-bg-sage:   #DCDCC9; /* muted sage-olive — "Best Outfit" section */
+  --color-ink:       #121212; /* near-black — headlines, nav, footer bg */
+  --color-ink-soft:  #2B2B2B; /* body copy on light bg */
+  --color-accent:    #EF5A28; /* signature orange — CTAs, badges, stripe */
+  --color-accent-dk: #C94A1F; /* hover/pressed state for accent */
+  --color-white:     #FFFFFF;
+  --color-muted:     #8A8A82; /* secondary text, nav links */
+  --color-card-bg:   #EDE9DF; /* product card / panel background */
+
+   --font-display: "Anton", "Archivo Black", sans-serif;
+  --font-body: "Inter", "General Sans", sans-serif;
+
+  --fs-hero: clamp(3rem, 8vw, 6.5rem);     /* FOR YOUR ESSENTIAL STYLE */
+  --fs-h2:   clamp(2.5rem, 6vw, 5rem);     /* THE BEST OUTFIT, JOIN WITH US */
+  --fs-h3:   1.75rem;                       /* OUR FEATURED PRODUCTS */
+  --fs-body: 1rem;
+  --fs-nav:  0.8rem;
+  --lh-tight: 0.95;                         /* headline line-height */
+--radius-card: 20px;     /* product cards, image panels */
+  --radius-pill: 999px;    /* buttons, category tags */
+  --radius-badge: 50%;     /* "30% OFF" rotating badge */
+  --section-pad-y: clamp(3rem, 8vw, 7rem);
+  --container-max: 1280px;
+  --gap-grid: 1.5rem;
+}

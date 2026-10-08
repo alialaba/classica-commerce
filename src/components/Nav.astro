@@ -1,0 +1,113 @@
+ <header class="site-header">
+    <div class="container">
+
+      <nav class="site-nav" aria-label="Primary navigation">
+        <div class="site-nav__left">
+          <!-- Logo -->
+          <a href="/" class="site-nav__logo" aria-label="Product Name — Home">
+            <img src="./assests/logo.min.svg" alt="sweetprocess" />
+          </a>
+
+
+          <!-- Main Navigation -->
+          <ul class="site-nav__list">
+
+            <li class="site-nav__item">
+              <a href="#customers" class="site-nav__link">
+               New Arrival
+              </a>
+            </li>
+
+            <li class="site-nav__item">
+              <a href="#how-it-works" class="site-nav__link">
+              Product
+              </a>
+            </li>
+
+            <li class="site-nav__item">
+              <a href="#pricing" class="site-nav__link">
+              Collection
+              </a>
+            </li>
+
+             <li class="site-nav__item">
+              <a href="#pricing" class="site-nav__link">
+              Brand
+              </a>
+            </li>
+
+          </ul>
+        </div>
+
+        <!-- Header Actions -->
+        <div class="site-nav__right">
+
+          <!-- Visible on desktop + tablet/mobile -->
+          <a href="#live-demo" class="site-nav__demo">
+        
+           <span>Cart</span>
+           <span>(0)</span>
+          </a>
+
+         
+
+          <!-- Desktop only -->
+          <a href="/signup" class="site-nav__cta">
+           Login
+          </a>
+
+          <!-- Tablet / Mobile only -->
+          <button type="button" class="site-menu__toggle" id="menu-toggle" aria-expanded="false"
+            aria-controls="site-menu" aria-label="Open menu">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+          </button>
+
+        </div>
+
+      </nav>
+
+    </div>
+  </header>
+
+
+
+<style>
+h1{
+    color:red;
+}
+.site-header{
+    position:absolute;
+    top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(100%, 1440px);
+  z-index: 1000;
+  font-family: var(--font-body);
+  background: transparent;
+
+  transition:
+    background-color var(--transition-base),
+    border-color var(--transition-base),
+}
+.site-nav{
+    display: flex;
+    justify-content: space-between;
+  align-items: center;
+}
+
+.site-nav__desktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.site-nav__list {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+</style>
