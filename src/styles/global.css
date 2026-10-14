@@ -1,4 +1,64 @@
-.container{
-    margin: 0 auto;
-    width: min(1440px, 90%);
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+:focus-visible {
+  outline: 3px solid var(--color-ink);
+  outline-offset: 3px;
+}
+
+.container {
+  width: min(100% - 2rem, var(--container-max));
+  margin-inline: auto;
+}
+
+/* Reusable button (will also be used by "Shop now" in the Join section) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.75rem;
+  padding: 0.35rem 0.35rem 0.35rem 1.25rem;
+  border-radius: var(--radius-pill);
+  font: 600 0.78rem/1 var(--font-body);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition:
+    background-color 0.25s,
+    color 0.25s;
+}
+
+.btn--primary {
+  background: var(--color-accent);
+  color: var(--color-ink);
+} /* ink on orange = 5.5:1 */
+.btn--primary:hover {
+  background: var(--color-accent-dk);
+  color: var(--color-white);
+}
+.btn__icon {
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--color-ink);
+  color: var(--color-white);
+  transition: transform 0.25s;
+}
+.btn:hover .btn__icon,
+.btn:focus-visible .btn__icon {
+  transform: translateX(0.2rem);
 }

@@ -24,4 +24,7 @@
   --section-pad-y: clamp(3rem, 8vw, 7rem);
   --container-max: 1280px;
   --gap-grid: 1.5rem;
+
+  --header-h: 4.5rem;
+  --ease-menu: cubic-bezier(.76, 0, .24, 1);
 }

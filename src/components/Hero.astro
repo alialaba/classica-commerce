@@ -1,0 +1,151 @@
+<section class="hero" aria-labelledby="hero-title">
+  <div class="container">
+ 
+    <div class="hero__top">
+      <p class="hero__intro" data-anim>
+        Elevate your wardrobe with Classica, where fashion meets individuality. Step into a world where trends
+        are transformed into timeless statements, and your unique personality finds its sartorial voice.
+      </p>
+ 
+      <figure class="hero__media">
+        <img class="hero__photo" data-anim
+             src="/src/assets/hero-top.jpg" width="640" height="400" fetchpriority="high"
+             alt="Man with curly hair wearing a patterned jacket, looking down at the camera" />
+ 
+        <div class="badge" data-anim role="img" aria-label="Summer sale: 30 percent off">
+          <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <defs><path id="badge-path" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+            <text class="badge__text">
+              <textPath href="#badge-path" textLength="230" lengthAdjust="spacing">SUMMER SALE • SUMMER SALE • SUMMER SALE •</textPath>
+            </text>
+          </svg>
+          <div class="badge__core" aria-hidden="true">
+            <span class="badge__value">30%</span>
+            <span class="badge__label">Off sale</span>
+          </div>
+        </div>
+      </figure>
+ 
+      <h1 class="hero__title" id="hero-title">
+        <span class="hero__title-line"><span class="hero__title-text" data-anim>For your</span></span>
+        <span class="hero__title-line"><span class="hero__title-text" data-anim>Essential style</span></span>
+      </h1>
+    </div>
+ 
+    <div class="hero__bottom">
+      <figure class="hero__card" data-anim>
+        <img class="hero__card-photo"
+             src="images/hero-bottom.jpg" width="960" height="540" loading="lazy"
+             alt="Two men standing side by side in layered camel and tan coats">
+        <span class="hero__card-watermark" aria-hidden="true">Classica</span>
+      </figure>
+ 
+      <div class="hero__statement">
+        <h2 class="hero__statement-title" data-anim>
+          We provide the best outfit to help you express your identity. Reflect who you are
+        </h2>
+        <a class="btn btn--primary" href="#collection" data-anim>
+          Shop collection
+          <span class="btn__icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+ 
+  </div>
+</section>
+
+<style>
+
+.hero {
+  padding-block: var(--section-pad-y);
+  padding-block-start: calc(var(--header-h) + var(--section-pad-y));   /* header is fixed */
+}
+ 
+/* ---- hero__top: GRID for layout, absolute only for the badge ---- */
+.hero__top {
+  container-type: inline-size;          /* lets the title size itself from THIS width (cqi) */
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, .62fr);
+  column-gap: var(--gap-grid);
+  align-items: start;
+ 
+  --hero-lh: .92;
+  --title-ratio: 6.3;   /* width of "ESSENTIAL STYLE" in em for Anton (measured 6.26) + a hair of safety */
+  --title-size: clamp(2.75rem, 12vw, 9.5rem);   /* fallback for browsers without container units */
+}
+@supports (font-size: 1cqi) {
+  /* Fluid: the longest line always spans the full container width, at every screen size */
+  .hero__top { --title-size: calc(100cqi / var(--title-ratio)); }
+}
+.hero__intro {
+  grid-column: 1; grid-row: 1;
+  max-width: 42ch; margin: 0;
+  padding-bottom: calc(var(--title-size) * var(--hero-lh));   /* reserves room for title line 1, which is pulled up beside the photo */
+  font-size: .75rem; line-height: 1.5; text-transform: uppercase; letter-spacing: .02em;
+}
+.hero__media { grid-column: 2; grid-row: 1; position: relative; align-self: stretch; margin: 0; }   /* stretches to intro + title line 1 */
+.hero__photo {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  border-radius: var(--radius-card); background: var(--color-card-bg);
+}
+.hero__title {
+  grid-column: 1 / -1; grid-row: 2; position: relative; z-index: 1;
+  margin: calc(var(--hero-lh) * -1em) 0 0;          /* pull line 1 up beside the photo */
+  font: 400 var(--title-size)/var(--hero-lh) var(--font-display);
+  text-transform: uppercase; letter-spacing: .01em;
+}
+.hero__title-line { display: block; overflow: hidden; padding-bottom: .04em; white-space: nowrap; }   /* mask for slide-up reveal */
+ 
+.hero__title-text { display: inline-block; }
+ 
+/* ---- badge (block) ---- */
+.badge {
+  --badge-size: clamp(5rem, 11vw, 8rem);
+  position: absolute; z-index: 2;
+  left: calc(var(--badge-size) * -.5); top: calc(50% - var(--badge-size) / 2);
+  display: grid; place-items: center;
+  width: var(--badge-size); aspect-ratio: 1; border-radius: 50%;
+  background: var(--color-ink); color: var(--color-white);
+}
+.badge__ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+.badge__text { fill: currentColor; font: 600 8px var(--font-body); }
+.badge__core {
+  display: grid; place-content: center; width: 58%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--color-accent); color: var(--color-ink); text-align: center; line-height: 1;
+}
+.badge__value { font: 400 clamp(1rem, 2.2vw, 1.6rem)/1 var(--font-display); }
+.badge__label { font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+ 
+/* ---- hero__bottom ---- */
+.hero__bottom {
+  display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+  gap: var(--gap-grid); align-items: center; margin-top: var(--gap-grid);
+}
+.hero__card {
+  position: relative; margin: 0; overflow: hidden; aspect-ratio: 16 / 9;
+  border-radius: var(--radius-card); background: var(--color-card-bg);
+}
+.hero__card-photo { width: 100%; height: 100%; object-fit: cover; }
+.hero__card-watermark {
+  position: absolute; left: .5rem; bottom: -.08em; pointer-events: none; white-space: nowrap;
+  font: 400 clamp(3.5rem, 11vw, 9rem)/.8 var(--font-display); text-transform: uppercase;
+  color: transparent; -webkit-text-stroke: 2px rgb(255 255 255 / .85);
+}
+.hero__statement { display: grid; justify-items: start; gap: 1.5rem; max-width: 28rem; }
+.hero__statement-title {
+  margin: 0; font: 500 clamp(1.25rem, 2.4vw, 2rem)/1.2 var(--font-body); text-transform: uppercase;
+}
+ 
+@media (max-width: 47.99rem) {
+  .hero__top { grid-template-columns: 1fr; row-gap: 1rem; }
+  .hero__intro { padding-bottom: 0; }
+  .hero__media { grid-column: 1; grid-row: 2; aspect-ratio: 16 / 10; }
+  .hero__title { grid-row: 3; margin-top: .25rem; }
+  .badge { left: 1rem; top: 1rem; }
+  .hero__bottom { grid-template-columns: 1fr; }
+}
+ 
+
+</style>

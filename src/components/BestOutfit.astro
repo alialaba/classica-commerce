@@ -1,0 +1,41 @@
+<section>
+<div class="container">
+
+<div>
+  <div class="badge" data-anim role="img" aria-label="Summer sale: 30 percent off">
+          <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+            <defs><path id="badge-path" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+            <text class="badge__text">
+              <textPath href="#badge-path" textLength="230" lengthAdjust="spacing">SUMMER SALE • SUMMER SALE • SUMMER SALE •</textPath>
+            </text>
+          </svg>
+          <div class="badge__core" aria-hidden="true">
+           < <span class="badge__icon"></span>
+           
+          </div>
+        </div>
+</div>
+</div>
+</section>
+
+
+<style>
+/* ---- badge (block) ---- */
+.badge {
+  --badge-size: clamp(5rem, 11vw, 8rem);
+  position: absolute; z-index: 2;
+  
+  display: grid; place-items: center;
+  width: var(--badge-size); aspect-ratio: 1; border-radius: 50%;
+  background: var(--color-ink); color: var(--color-white);
+}
+.badge__ring { position: absolute; inset: 0; width: 100%; height: 100%; }
+.badge__text { fill: currentColor; font: 600 8px var(--font-body); }
+.badge__core {
+  display: grid; place-content: center; width: 58%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--color-accent); color: var(--color-ink); text-align: center; line-height: 1;
+}
+.badge__value { font: 400 clamp(1rem, 2.2vw, 1.6rem)/1 var(--font-display); }
+.badge__label { font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+ 
+</style>
