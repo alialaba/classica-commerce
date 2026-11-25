@@ -1,24 +1,27 @@
-<div class="marquee">
+---
+interface Props {
+  /* "dark": ink band under the hero (overlaps the hero card).
+     "light": cream band above the footer (its lower part blends into the footer's ink). */
+  variant?: "dark" | "light";
+}
+const { variant = "dark" } = Astro.props;
+const items = ["30% off in all brands", "New year discount", "Summer sale", "Extra off in all brands"];
+---
+<div class:list={["marquee", `marquee--${variant}`]}>
   <div class="marquee__band marquee__band--accent" aria-hidden="true"></div>
- 
-  <div class="marquee__band marquee__band--dark">
+
+  <div class="marquee__band marquee__band--text">
     <div class="marquee__track" data-marquee>
       <ul class="marquee__list" role="list" aria-label="Current promotions">
-        <li class="marquee__item">30% off in all brands</li>
-        <li class="marquee__item">New year discount</li>
-        <li class="marquee__item">Summer sale</li>
-        <li class="marquee__item">Extra off in all brands</li>
+        {items.map((item) => <li class="marquee__item">{item}</li>)}
       </ul>
       <!-- exact copy so the loop is seamless; hidden from assistive tech -->
       <ul class="marquee__list" role="list" aria-hidden="true">
-        <li class="marquee__item">30% off in all brands</li>
-        <li class="marquee__item">New year discount</li>
-        <li class="marquee__item">Summer sale</li>
-        <li class="marquee__item">Extra off in all brands</li>
+        {items.map((item) => <li class="marquee__item">{item}</li>)}
       </ul>
     </div>
   </div>
- 
+
   <button class="marquee__toggle" type="button" aria-pressed="false">Pause promotions animation</button>
 </div>
 
@@ -36,7 +39,7 @@
   height: clamp(3.25rem, 7vw, 5rem); background: var(--color-accent);
   transform: translateY(-35%) rotate(var(--marquee-accent-tilt));
 }
-.marquee__band--dark {
+.marquee__band--text {
   display: flex; align-items: center; overflow: hidden;
   height: clamp(2.75rem, 5.5vw, 4rem); background: var(--color-ink); color: var(--color-white);
   transform: translateY(-50%) rotate(var(--marquee-dark-tilt));
@@ -65,4 +68,11 @@
 .marquee__toggle:focus-visible {
   width: auto; height: auto; padding: .7rem 1rem; clip-path: none; outline: 3px solid var(--color-accent); outline-offset: 2px;
 }
+
+/* light variant: sits on top of the footer */
+.marquee--light {
+  margin-top: calc(var(--section-pad-y) * -.5);   /* tucks into the previous section's bottom padding */
+  background: linear-gradient(to bottom, transparent 70%, var(--color-ink) 70%);   /* base blends into the footer */
+}
+.marquee--light .marquee__band--text { background: var(--color-card-bg); color: var(--color-ink); }
 </style>

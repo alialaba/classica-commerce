@@ -1,0 +1,9 @@
+{
+  "name": "CozyComfort Hoodie",
+  "category": "Hoodies",
+  "price": 249,
+  "image": "/images/product-hoodie.webp",
+  "imageAlt": "Bearded man in a black hoodie in front of a brick wall",
+  "featured": true,
+  "featuredOrder": 1
+}

@@ -1,0 +1,84 @@
+---
+import { getCollection } from "astro:content";
+import ProductCard from "./ProductCard.astro";
+
+// Products come from src/content/products/*.json; keep the featured ones, large card first.
+const featured = (await getCollection("products", ({ data }) => data.featured))
+  .sort((a, b) => (a.data.featuredOrder ?? 99) - (b.data.featuredOrder ?? 99))
+  .slice(0, 3);
+---
+<section class="featured" id="product" aria-labelledby="featured-title">
+  <div class="container">
+    <div class="featured__header">
+      <h2 class="featured__title" id="featured-title">
+        <span class="featured__title-line">Our featured</span>
+        <span class="featured__title-line">products</span>
+      </h2>
+      <div class="featured__intro">
+        <p class="featured__text">We provide the best outfit to help you to express your identity. Reflect who you are your identity. Reflect who you are your identity. Reflect who you are</p>
+        <a class="featured__link" href="#">
+          View all products
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <ul class="featured__grid" role="list">
+      {featured.map((product, i) => (
+        <li class:list={["featured__item", { "featured__item--large": i === 0 }]}>
+          <ProductCard product={product} size={i === 0 ? "large" : "small"} />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>
+
+<style>
+.featured { padding-bottom: var(--section-pad-y); }
+
+/* ---- header: title left, intro right on desktop ---- */
+.featured__header {
+  display: grid; gap: 1.25rem 2rem;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+}
+.featured__title {
+  margin: 0;
+  font: 400 clamp(2.5rem, 4.7vw, 4.25rem)/.95 var(--font-display); text-transform: uppercase;
+}
+.featured__title-line { display: block; }
+.featured__intro { display: grid; justify-items: start; gap: 1rem; align-content: start; }
+.featured__text {
+  max-width: 34rem; margin: 0; color: var(--color-ink-soft);
+  font: 500 .82rem/1.75 var(--font-body); text-transform: uppercase;
+}
+.featured__link {
+  position: relative; display: inline-flex; align-items: center; gap: .5rem; min-height: 2.75rem;
+  color: var(--color-ink); text-decoration: none;
+  font: 600 .75rem/1 var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+}
+.featured__link::after {
+  content: ""; position: absolute; inset: auto 0 .45rem; height: 2px; background: var(--color-accent);
+  transform-origin: left; transition: transform .35s var(--ease-menu);
+}
+.featured__link:hover::after { transform: scaleX(.4); }
+
+/* ---- cards: stacked on mobile, 1 + 2 on tablet, 1 tall + 2 stacked on desktop ---- */
+.featured__grid {
+  display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(1rem, 2.2vw, 1.875rem);
+  margin: 0; padding: 0; list-style: none;
+}
+.featured__item { aspect-ratio: 4 / 3; }
+.featured__item--large { aspect-ratio: 4 / 5; }
+
+@media (min-width: 40rem) {
+  .featured__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .featured__item { aspect-ratio: 515 / 379; }
+  .featured__item--large { grid-column: 1 / -1; aspect-ratio: 16 / 10; }
+}
+
+@media (min-width: 60rem) {
+  .featured__header, .featured__grid { grid-template-columns: minmax(0, 1.42fr) minmax(0, 1fr); }
+  .featured__intro { padding-top: .4rem; }
+  .featured__item--large { grid-column: 1; grid-row: span 2; aspect-ratio: auto; }
+}
+</style>

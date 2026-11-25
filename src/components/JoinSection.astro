@@ -1,0 +1,116 @@
+---
+import Button from "./Button.astro";
+---
+<section class="join" id="join" aria-labelledby="join-title">
+  <div class="container">
+    <div class="join__banner">
+      <img class="join__img"
+           src="/images/join-banner.webp" width="1920" height="890" loading="lazy" decoding="async"
+           alt="Neutral knitwear and blouses on a clothing rail beside dried pampas grass">
+
+      <div class="join__content">
+        <h2 class="join__title" id="join-title">
+          <span class="join__title-line join__title-line--outline">Join</span>
+          <span class="join__title-line">with us</span>
+        </h2>
+        <p class="join__text">We provide the best outfit to help you to express your identity. Reflect who you are your identity.</p>
+      </div>
+
+      <button class="join__play" type="button" aria-label="Play our intro video">
+        <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M8 5.5v13l10.5-6.5L8 5.5Z" fill="currentColor"/></svg>
+      </button>
+
+      <!-- cream "tab" cut into the bottom-right corner; ::before/::after draw the curved inner corners -->
+      <div class="join__cta">
+        <Button href="#product">Shop now</Button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.join { padding-bottom: var(--section-pad-y); }
+
+/* ---- banner: photo + dark shade + content; mobile first ---- */
+.join__banner {
+  --title-ratio: 4.4;                     /* banner width / font size; "WITH US" is 3.0em wide in Anton */
+  --title-size: clamp(3rem, 20vw, 8rem);
+  --notch-r: 1.75rem;
+  position: relative; overflow: clip;     /* clip (not hidden) so aspect-ratio can still grow with content */
+  container-type: inline-size;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  aspect-ratio: 3 / 4;
+  padding: 1.5rem 1.5rem 5.5rem;
+  border-radius: 1.75rem;
+  background: var(--color-ink-soft); color: var(--color-bg);
+}
+@supports (font-size: 1cqi) {
+  .join__banner { --title-size: calc(100cqi / var(--title-ratio)); }
+}
+.join__banner :focus-visible { outline-color: var(--color-bg); }
+
+.join__img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; }
+.join__banner::after {                    /* shade under the text: measured >= 7:1 for cream text on the current (light) photo */
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: linear-gradient(0deg, rgb(18 18 18 / .8), rgb(18 18 18 / .7) 55%, rgb(18 18 18 / .2));
+}
+
+.join__content { position: relative; z-index: 2; }
+.join__title {
+  margin: 0 0 clamp(1.25rem, 3.6cqi, 2.9rem);
+  font: 400 var(--title-size)/1.05 var(--font-display); text-transform: uppercase;
+}
+.join__title-line { display: block; white-space: nowrap; }
+.join__title-line--outline { color: transparent; -webkit-text-stroke: 1.5px var(--color-bg); }
+.join__text {
+  max-width: 37rem; margin: 0;
+  font: 500 clamp(.78rem, 1.1vw, .9rem)/1.8 var(--font-body); text-transform: uppercase;
+}
+
+/* ---- play button: frosted circle ---- */
+.join__play {
+  position: absolute; z-index: 2; top: 1.25rem; right: 1.25rem;
+  display: grid; place-items: center;
+  width: clamp(4rem, 9.7cqi, 7.75rem); aspect-ratio: 1; padding: 0;
+  border: 0; border-radius: 50%; cursor: pointer;
+  background: rgb(255 255 255 / .3); color: var(--color-white);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+  transition: background-color .25s;
+}
+.join__play svg { width: 34%; height: 34%; margin-left: 6%; }   /* nudge: a triangle looks off-centre otherwise */
+.join__play:hover { background: rgb(255 255 255 / .45); }
+
+/* ---- "Shop now" tab in the bottom-right corner ---- */
+.join__cta {
+  position: absolute; z-index: 2; right: 0; bottom: 0;
+  padding: .6rem 0 0 .6rem;
+  border-top-left-radius: var(--notch-r); background: var(--color-bg);
+}
+.join__cta :focus-visible { outline-color: var(--color-ink); }
+.join__cta::before, .join__cta::after {   /* inverted (concave) corners joining the tab to the banner */
+  content: ""; position: absolute; width: var(--notch-r); height: var(--notch-r);
+  background: radial-gradient(circle at 0 0, transparent calc(var(--notch-r) - .5px), var(--color-bg) var(--notch-r));
+}
+.join__cta::before { right: 0; bottom: 100%; }
+.join__cta::after  { right: 100%; bottom: 0; }
+
+@media (min-width: 40rem) {
+  .join__banner {
+    --title-ratio: 7.5;
+    justify-content: center; aspect-ratio: 16 / 9;
+    padding: 2rem 2rem 5rem;
+  }
+  .join__banner::after { background: linear-gradient(90deg, rgb(18 18 18 / .8), rgb(18 18 18 / .7) 50%, rgb(18 18 18 / .2) 90%); }
+  .join__text { max-width: min(37rem, 62%); }
+  .join__play { top: 45%; right: auto; left: 80%; transform: translate(-50%, -50%); }
+}
+
+@media (min-width: 60rem) {
+  .join__banner {
+    --title-ratio: 9.4;                   /* design: ~128px Anton (111px caps) in a 1280px banner */
+    aspect-ratio: 1812 / 840;
+    padding: 2.5rem 2.5rem 3rem;
+  }
+  .join__play { top: 43%; left: 78%; }
+}
+</style>

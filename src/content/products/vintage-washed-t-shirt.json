@@ -1,0 +1,9 @@
+{
+  "name": "Vintage Washed T-Shirt",
+  "category": "T-Shirt",
+  "price": 199,
+  "image": "/images/product-tshirt.webp",
+  "imageAlt": "Tattooed man in a white T-shirt and brown beanie leaning against an orange wall",
+  "featured": true,
+  "featuredOrder": 3
+}

@@ -62,3 +62,19 @@ img {
 .btn:focus-visible .btn__icon {
   transform: translateX(0.2rem);
 }
+
+
+/* ===== page-level helpers (used by BaseLayout + Header script) ===== */
+.skip-link {
+  position: absolute; top: -4rem; left: 1rem; z-index: 1100; padding: .75rem 1rem; border-radius: var(--radius-pill);
+  background: var(--color-ink); color: var(--color-white); font: 600 .8rem var(--font-body); text-decoration: none;
+}
+.skip-link:focus-visible { top: 1rem; }
+.is-scroll-locked { overflow: hidden; }
+
+/* Orange bars fading into a dark background (CategoryPanel + Footer). Size via --stripes-w / --stripes-h. */
+.stripes {
+  width: var(--stripes-w, 8.5rem); height: var(--stripes-h, 4rem);
+  background: repeating-linear-gradient(90deg, var(--color-accent) 0 7px, transparent 7px 19px);
+  -webkit-mask: linear-gradient(90deg, #000 10%, transparent 95%); mask: linear-gradient(90deg, #000 10%, transparent 95%);
+}

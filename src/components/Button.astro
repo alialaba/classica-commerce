@@ -1,0 +1,19 @@
+---
+/*
+  Pill link with an arrow circle: <Button href="#product">Shop now</Button>
+  The look (.btn, .btn--primary, .btn__icon) lives in global.css.
+  Extra attributes (e.g. data-anim) are passed straight through to the <a>.
+*/
+interface Props {
+  href: string;
+  variant?: "primary";
+  [attr: string]: unknown;    // allows data-anim, aria-*, etc.
+}
+const { href, variant = "primary", ...rest } = Astro.props;
+---
+<a class:list={["btn", `btn--${variant}`]} href={href} {...rest}>
+  <slot />
+  <span class="btn__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+  </span>
+</a>

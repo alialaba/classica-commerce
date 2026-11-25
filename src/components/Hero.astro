@@ -1,3 +1,7 @@
+---
+import Badge from "./Badge.astro";
+import Button from "./Button.astro";
+---
 <section class="hero" aria-labelledby="hero-title">
   <div class="container">
  
@@ -9,20 +13,11 @@
  
       <figure class="hero__media">
         <img class="hero__photo" data-anim
-             src="/src/assets/hero-top.jpg" width="640" height="400" fetchpriority="high"
-             alt="Man with curly hair wearing a patterned jacket, looking down at the camera" />
+             src="/images/hero-top.webp" width="1280" height="853" fetchpriority="high"
+             alt="Person with dark, shaggy hair in a patterned hooded jacket, head bowed, against a grey backdrop" />
  
-        <div class="badge" data-anim role="img" aria-label="Summer sale: 30 percent off">
-          <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-            <defs><path id="badge-path" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
-            <text class="badge__text">
-              <textPath href="#badge-path" textLength="230" lengthAdjust="spacing">SUMMER SALE • SUMMER SALE • SUMMER SALE •</textPath>
-            </text>
-          </svg>
-          <div class="badge__core" aria-hidden="true">
-            <span class="badge__value">30%</span>
-            <span class="badge__label">Off sale</span>
-          </div>
+        <div class="hero__badge" data-anim>
+          <Badge id="hero-badge" variant="dark" value="30%" caption="Off sale" label="Summer sale: 30 percent off" />
         </div>
       </figure>
  
@@ -35,8 +30,8 @@
     <div class="hero__bottom">
       <figure class="hero__card" data-anim>
         <img class="hero__card-photo"
-             src="images/hero-bottom.jpg" width="960" height="540" loading="lazy"
-             alt="Two men standing side by side in layered camel and tan coats">
+             src="/images/hero-bottom.webp" width="960" height="540" loading="lazy" decoding="async"
+             alt="Two men in brown and tan jackets talking on a terrace above city rooftops">
         <span class="hero__card-watermark" aria-hidden="true">Classica</span>
       </figure>
  
@@ -44,12 +39,7 @@
         <h2 class="hero__statement-title" data-anim>
           We provide the best outfit to help you express your identity. Reflect who you are
         </h2>
-        <a class="btn btn--primary" href="#collection" data-anim>
-          Shop collection
-          <span class="btn__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
-        </a>
+        <Button href="#collection" data-anim>Shop collection</Button>
       </div>
     </div>
  
@@ -100,24 +90,12 @@
  
 .hero__title-text { display: inline-block; }
  
-/* ---- badge (block) ---- */
-.badge {
-  --badge-size: clamp(5rem, 11vw, 8rem);
+/* ---- badge placement (the look lives in Badge.astro) ---- */
+.hero__badge {
   position: absolute; z-index: 2;
   left: calc(var(--badge-size) * -.5); top: calc(50% - var(--badge-size) / 2);
-  display: grid; place-items: center;
-  width: var(--badge-size); aspect-ratio: 1; border-radius: 50%;
-  background: var(--color-ink); color: var(--color-white);
 }
-.badge__ring { position: absolute; inset: 0; width: 100%; height: 100%; }
-.badge__text { fill: currentColor; font: 600 8px var(--font-body); }
-.badge__core {
-  display: grid; place-content: center; width: 58%; aspect-ratio: 1; border-radius: 50%;
-  background: var(--color-accent); color: var(--color-ink); text-align: center; line-height: 1;
-}
-.badge__value { font: 400 clamp(1rem, 2.2vw, 1.6rem)/1 var(--font-display); }
-.badge__label { font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
- 
+
 /* ---- hero__bottom ---- */
 .hero__bottom {
   display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
@@ -143,7 +121,7 @@
   .hero__intro { padding-bottom: 0; }
   .hero__media { grid-column: 1; grid-row: 2; aspect-ratio: 16 / 10; }
   .hero__title { grid-row: 3; margin-top: .25rem; }
-  .badge { left: 1rem; top: 1rem; }
+  .hero__badge { left: 1rem; top: 1rem; }
   .hero__bottom { grid-template-columns: 1fr; }
 }
  

@@ -27,4 +27,5 @@
 
   --header-h: 4.5rem;
   --ease-menu: cubic-bezier(.76, 0, .24, 1);
+    --badge-size: clamp(5rem, 11vw, 8rem);
 }
