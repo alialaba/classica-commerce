@@ -1,0 +1,9 @@
+{
+  "name": "CozyComfort Hoodie",
+  "category": "Hoodies",
+  "price": 249,
+  "image": "/images/product-hoodie.webp",
+  "imageAlt": "Young man with curly hair pulling up the hood of a black oversized hoodie",
+  "featured": true,
+  "featuredOrder": 1
+}

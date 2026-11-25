@@ -1,0 +1,9 @@
+{
+  "name": "Textured Long Sleeve Sweater",
+  "category": "Sweaters",
+  "price": 149,
+  "image": "/images/product-sweater.webp",
+  "imageAlt": "Man in a mustard beanie and a grey knit sweater with a Nordic pattern",
+  "featured": true,
+  "featuredOrder": 2
+}

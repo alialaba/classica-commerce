@@ -1,0 +1,105 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  product: CollectionEntry<"products">;
+  size?: "large" | "small";
+}
+const { product, size = "small" } = Astro.props;
+const { name, category, price, image, imageAlt } = product.data;
+
+const formattedPrice = new Intl.NumberFormat("en-US", { style: "currency", currency: "USD" }).format(price);
+const nameWords = name.split(" ");   // hyphenated words ("T-Shirt") are kept on one line below
+---
+<article class:list={["product-card", `product-card--${size}`]}>
+  <img class="product-card__img" src={image} width="1200" height="1300" loading="lazy" decoding="async" alt={imageAlt} />
+  <span class="product-card__tag">{category}</span>
+
+  <div class="product-card__bottom">
+    <div class="product-card__info">
+      <h3 class="product-card__name">
+        {nameWords.map((word, i) => (
+          <>{i > 0 && " "}{word.includes("-") ? <span class="product-card__nowrap">{word}</span> : word}</>
+        ))}
+      </h3>
+      <p class="product-card__price">{formattedPrice}</p>
+    </div>
+
+    <div class="product-card__actions">
+      <button class="product-card__action" type="button" aria-label={`Add ${name} to wishlist`}>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.4 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10Z"/>
+        </svg>
+      </button>
+      <button class="product-card__action" type="button" aria-label={`Add ${name} to cart`} data-product-id={product.id}>
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <path d="M5.5 8h13l-1 12.5h-11L5.5 8Z"/><path d="M9 10V6.5a3 3 0 0 1 6 0V10"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</article>
+
+<style>
+.product-card {
+  position: relative; overflow: hidden; height: 100%;
+  container-type: inline-size;            /* lets the card adapt to its own width (see @container below) */
+  border-radius: var(--radius-card); background: var(--color-card-bg);
+}
+.product-card__img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+
+.product-card__tag {
+  position: absolute; top: .9rem; left: .9rem;
+  padding: .6rem .9rem; border-radius: var(--radius-pill); background: var(--color-white);
+  font: 600 .7rem/1 var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+}
+
+.product-card__bottom {
+  position: absolute; inset: auto .9rem .9rem;
+  display: flex; align-items: center; justify-content: space-between; gap: .75rem;
+}
+.product-card__info {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  flex: 0 1 19rem; min-width: 0;
+  padding: 1.35rem 1rem 1.35rem 1.5rem; border-radius: 1.1rem; background: var(--color-white);
+}
+.product-card__name {
+  margin: 0;
+  font: 600 .88rem/1.25 var(--font-body); text-transform: uppercase;
+}
+.product-card__nowrap { white-space: nowrap; }
+.product-card__price {
+  flex: none; margin: 0; padding: .55rem .75rem; border-radius: .6rem;
+  background: var(--color-accent); color: var(--color-ink);    /* ink on accent: white fails AA */
+  font: 600 .85rem/1 var(--font-body); white-space: nowrap;
+}
+
+/* heart + bag: two white circles joined by a short "bridge" */
+.product-card__actions { position: relative; display: flex; gap: .45rem; flex: none; }
+.product-card__actions::before {
+  content: ""; position: absolute; top: 50%; left: 1.5rem; right: 1.5rem; height: 1.1rem;
+  transform: translateY(-50%); background: var(--color-white);
+}
+.product-card__action {
+  position: relative; display: grid; place-items: center;
+  width: 3.25rem; height: 3.25rem; padding: 0;
+  border: 0; border-radius: 50%; background: var(--color-white); color: var(--color-ink);
+  cursor: pointer; transition: color .2s;
+}
+.product-card__action:hover { color: var(--color-accent-dk); }
+
+/* large variant: the big "Hoodies" card */
+.product-card--large .product-card__info {
+  flex-basis: 30rem; padding: clamp(1rem, 2.2vw, 1.6rem) clamp(1rem, 2.2vw, 1.6rem) clamp(1rem, 2.2vw, 1.6rem) clamp(1.1rem, 2.6vw, 2rem);
+  border-radius: 1.5rem;
+}
+.product-card--large .product-card__name { font-size: clamp(1.1rem, 2.4vw, 2.1rem); line-height: 1.15; }
+.product-card--large .product-card__price { padding: .75rem 1rem; font-size: clamp(.85rem, 1.2vw, 1rem); }
+.product-card--large .product-card__action { width: 3.5rem; height: 3.5rem; }
+
+/* narrow card (tablet/mobile small cards): price goes under the name so the name keeps its width */
+@container (max-width: 30rem) {
+  .product-card__info { flex-direction: column; align-items: flex-start; gap: .6rem; padding: 1rem 1.1rem; }
+  .product-card__action { width: 3rem; height: 3rem; }
+}
+</style>
