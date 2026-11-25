@@ -1,41 +1,97 @@
-<section>
-<div class="container">
-
-<div>
-  <div class="badge" data-anim role="img" aria-label="Summer sale: 30 percent off">
-          <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-            <defs><path id="badge-path" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
-            <text class="badge__text">
-              <textPath href="#badge-path" textLength="230" lengthAdjust="spacing">SUMMER SALE • SUMMER SALE • SUMMER SALE •</textPath>
-            </text>
-          </svg>
-          <div class="badge__core" aria-hidden="true">
-           < <span class="badge__icon"></span>
-           
-          </div>
-        </div>
-</div>
-</div>
+<section class="best-outfit" aria-labelledby="best-outfit-title">
+  <div class="container">
+    <div class="best-outfit__card">
+      <div class="best-outfit__stage">
+ 
+        <h2 class="best-outfit__title" id="best-outfit-title">
+          <span class="best-outfit__title-line"><span class="best-outfit__title-text" data-anim>The</span></span>
+          <span class="best-outfit__title-line"><span class="best-outfit__title-text" data-anim>Best</span></span>
+          <span class="best-outfit__title-line best-outfit__title-line--outline"><span class="best-outfit__title-text" data-anim>Outfit</span></span>
+        </h2>
+ 
+        <img class="best-outfit__photo best-outfit__photo--left" data-anim
+             src="images/look-street.webp" width="900" height="1350" loading="lazy" decoding="async"
+             alt="Man in sunglasses and a beige double-breasted coat, one hand in his pocket">
+        <img class="best-outfit__photo best-outfit__photo--right" data-anim
+             src="images/look-camel.webp" width="900" height="1350" loading="lazy" decoding="async"
+             alt="Man in a camel overcoat over a brown turtleneck, hands in his pockets, looking to the side">
+ 
+        <p class="best-outfit__text" data-anim>We provide the best outfit to help you express your identity. Reflect who you are.</p>
+      </div>
+ 
+      <a class="badge badge--light best-outfit__badge" data-anim href="#collection" aria-label="Shop the summer sale">
+        <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+          <defs><path id="badge-path-outfit" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+          <text class="badge__text">
+            <textPath href="#badge-path-outfit" textLength="230" lengthAdjust="spacing">SUMMER SALE • SUMMER SALE • SUMMER SALE •</textPath>
+          </text>
+        </svg>
+        <span class="badge__core" aria-hidden="true">
+          <svg class="badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+        </span>
+      </a>
+    </div>
+  </div>
 </section>
 
-
 <style>
-/* ---- badge (block) ---- */
-.badge {
-  --badge-size: clamp(5rem, 11vw, 8rem);
-  position: absolute; z-index: 2;
-  
-  display: grid; place-items: center;
-  width: var(--badge-size); aspect-ratio: 1; border-radius: 50%;
-  background: var(--color-ink); color: var(--color-white);
+
+.best-outfit{
+     padding-block: var(--section-pad-y);
 }
-.badge__ring { position: absolute; inset: 0; width: 100%; height: 100%; }
-.badge__text { fill: currentColor; font: 600 8px var(--font-body); }
-.badge__core {
-  display: grid; place-content: center; width: 58%; aspect-ratio: 1; border-radius: 50%;
-  background: var(--color-accent); color: var(--color-ink); text-align: center; line-height: 1;
+.best-outfit__card {
+  position: relative; 
+  overflow: hidden;
+  padding: clamp(1.25rem, 4vw, 3.5rem);
+  border-radius: calc(var(--radius-card) + 8px);
+   background: var(--color-bg-sage);
 }
-.badge__value { font: 400 clamp(1rem, 2.2vw, 1.6rem)/1 var(--font-display); }
-.badge__label { font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
- 
+
+.best-outfit__stage {
+  --title-ratio: 2.5;                        /* width of "OUTFIT" in em for Anton (measured 2.45) */
+  --title-share: 72;                         /* % of the stage that "OUTFIT" should span (mobile) */
+  --title-size: clamp(3rem, 18vw, 8rem);     /* fallback without container units */
+  --stagger: clamp(1.5rem, 8cqi, 3rem);      /* vertical offset between the two photos */
+  container-type: inline-size;
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem 1rem;
+}
+@supports (font-size: 1cqi) {
+  .best-outfit__stage { --title-size: calc(var(--title-share) * 1cqi / var(--title-ratio)); }
+}
+.best-outfit__title {
+  grid-column: 1 / -1; grid-row: 1; z-index: 2; margin: 0; text-align: center;
+  font: 400 var(--title-size)/.9 var(--font-display); text-transform: uppercase; letter-spacing: .01em;
+}
+.best-outfit__title-line { display: block; overflow: hidden; padding-bottom: .04em; }   /* mask for the reveal */
+.best-outfit__title-text { display: inline-block; }
+.best-outfit__title-line--outline .best-outfit__title-text { color: var(--color-ink); }
+@supports (-webkit-text-stroke: 2px black) {
+  .best-outfit__title-line--outline .best-outfit__title-text { color: transparent; -webkit-text-stroke: 2px var(--color-ink); }
+}
+
+.best-outfit__photo {
+  width: 100%; height: auto; aspect-ratio: 3 / 4; object-fit: cover; object-position: 50% 20%;
+  border-radius: var(--radius-card); background: var(--color-card-bg);
+  transform: rotate(var(--tilt, 0deg));
+}
+
+.best-outfit__photo--left  { grid-column: 1; grid-row: 2; --tilt: -6deg; }
+.best-outfit__photo--right { grid-column: 2; grid-row: 2; --tilt: 5deg; margin-top: var(--stagger); }
+.best-outfit__text {
+  grid-column: 1 / -1; grid-row: 3; max-width: 34ch; margin: 0;
+  font-size: .75rem; line-height: 1.5; text-transform: uppercase; letter-spacing: .02em;
+}
+.best-outfit__badge { position: absolute; z-index: 3; top: clamp(1rem, 3vw, 2.5rem); right: clamp(1rem, 3vw, 2.5rem); }
+@media (min-width: 48rem) {
+  .best-outfit__stage {
+    --title-share: 38;
+    --stagger: clamp(4.5rem, 10cqi, 5.5rem);   /* also the band where the paragraph sits */
+    grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 0 1rem;
+  }
+  .best-outfit__title { grid-column: 3 / span 8; grid-row: 1; align-self: start; margin-top: calc(var(--stagger) * .15); }   /* top-aligned so it never runs into the paragraph band */
+  .best-outfit__photo--left  { grid-column: 1 / span 4; grid-row: 1; align-self: start; margin-bottom: var(--stagger); --tilt: -8deg; }
+  .best-outfit__photo--right { grid-column: 9 / span 4; grid-row: 1; align-self: end; --tilt: 7deg; }
+  .best-outfit__text { grid-column: 1 / span 5; grid-row: 1; align-self: end; z-index: 3; }
+  .best-outfit__badge { top: 7%; right: 24%; }
+}
 </style>
