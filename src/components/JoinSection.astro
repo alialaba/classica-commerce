@@ -6,7 +6,7 @@ import Button from "./Button.astro";
     <div class="join__banner">
       <img class="join__img"
            src="/images/join-banner.webp" width="1920" height="890" loading="lazy" decoding="async"
-           alt="Neutral and rust-coloured garments on a clothing rail beside a rubber plant">
+           alt="Neutral knitwear and blouses on a clothing rail beside dried pampas grass">
 
       <div class="join__content">
         <h2 class="join__title" id="join-title">
@@ -50,9 +50,9 @@ import Button from "./Button.astro";
 .join__banner :focus-visible { outline-color: var(--color-bg); }
 
 .join__img { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; object-fit: cover; }
-.join__banner::after {                    /* shade so the cream text stays readable on any photo */
+.join__banner::after {                    /* shade under the text: measured >= 7:1 for cream text on the current (light) photo */
   content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
-  background: linear-gradient(0deg, rgb(18 18 18 / .6), rgb(18 18 18 / .1) 75%);
+  background: linear-gradient(0deg, rgb(18 18 18 / .8), rgb(18 18 18 / .7) 55%, rgb(18 18 18 / .2));
 }
 
 .join__content { position: relative; z-index: 2; }
@@ -100,7 +100,7 @@ import Button from "./Button.astro";
     justify-content: center; aspect-ratio: 16 / 9;
     padding: 2rem 2rem 5rem;
   }
-  .join__banner::after { background: linear-gradient(90deg, rgb(18 18 18 / .6), rgb(18 18 18 / .1) 70%); }
+  .join__banner::after { background: linear-gradient(90deg, rgb(18 18 18 / .8), rgb(18 18 18 / .7) 50%, rgb(18 18 18 / .2) 90%); }
   .join__text { max-width: min(37rem, 62%); }
   .join__play { top: 45%; right: auto; left: 80%; transform: translate(-50%, -50%); }
 }
