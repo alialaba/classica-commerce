@@ -1,0 +1,74 @@
+---
+/*
+  Round "SUMMER SALE" badge with a spinning text ring.
+  - variant "dark": a label (role="img"), shows value + caption, e.g. 30% / Off sale
+  - variant "light": a link (pass href), shows an arrow
+  Placement is the parent's job: wrap <Badge> in an element the parent positions (e.g. .hero__badge).
+  Text comes in as props, not slots, so it gets this component's scoped styles.
+*/
+interface Props {
+  id: string;                 // must be unique on the page: used for the SVG text-path id
+  label: string;              // accessible name, e.g. "Summer sale: 30 percent off"
+  variant?: "dark" | "light";
+  href?: string;              // makes the badge a link
+  value?: string;             // big text in the centre, e.g. "30%"
+  caption?: string;           // small text under the value, e.g. "Off sale"
+  ringText?: string;
+}
+const {
+  id, label, variant = "dark", href, value, caption,
+  ringText = "SUMMER SALE • SUMMER SALE • SUMMER SALE •",
+} = Astro.props;
+
+const Tag = href ? "a" : "div";
+const pathId = `${id}-path`;
+---
+<Tag
+  class:list={["badge", `badge--${variant}`]}
+  href={href}
+  role={href ? undefined : "img"}
+  aria-label={label}
+>
+  <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+    <defs><path id={pathId} d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
+    <text class="badge__text">
+      <textPath href={`#${pathId}`} textLength="230" lengthAdjust="spacing">{ringText}</textPath>
+    </text>
+  </svg>
+  <span class="badge__core" aria-hidden="true">
+    {value ? (
+      <>
+        <span class="badge__value">{value}</span>
+        {caption && <span class="badge__caption">{caption}</span>}
+      </>
+    ) : (
+      <svg class="badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
+    )}
+  </span>
+</Tag>
+
+<style>
+.badge {
+  position: relative; display: grid; place-items: center;
+  width: var(--badge-size); aspect-ratio: 1; border-radius: 50%; text-decoration: none;
+}
+.badge--dark  { background: var(--color-ink); color: var(--color-white); }
+.badge--light { background: var(--color-bg);  color: var(--color-ink); }
+
+.badge__ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: badge-spin 14s linear infinite; }
+.badge__text { fill: currentColor; font: 600 8px var(--font-body); }
+@keyframes badge-spin { to { transform: rotate(360deg); } }
+
+.badge__core {
+  display: grid; place-content: center; justify-items: center; width: 58%; aspect-ratio: 1; border-radius: 50%;
+  background: var(--color-accent); color: var(--color-ink); text-align: center; line-height: 1;
+  transition: background-color .25s, color .25s;
+}
+.badge__value   { font: 400 clamp(1rem, 2.2vw, 1.6rem) / 1 var(--font-display); }
+.badge__caption { font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
+.badge__icon    { width: clamp(1.1rem, 2.6vw, 1.6rem); height: clamp(1.1rem, 2.6vw, 1.6rem); }
+
+a.badge:hover .badge__core, a.badge:focus-visible .badge__core { background: var(--color-ink); color: var(--color-white); }
+
+@media (prefers-reduced-motion: reduce) { .badge__ring { animation: none; } }
+</style>

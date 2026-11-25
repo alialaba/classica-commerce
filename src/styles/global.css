@@ -78,29 +78,3 @@ img {
   background: repeating-linear-gradient(90deg, var(--color-accent) 0 7px, transparent 7px 19px);
   -webkit-mask: linear-gradient(90deg, #000 10%, transparent 95%); mask: linear-gradient(90deg, #000 10%, transparent 95%);
 }
-
-
-/* ===== badge (shared by Hero + BestOutfit) ===== */
-.badge {
-  position: relative; display: grid; place-items: center;
-  width: var(--badge-size); aspect-ratio: 1; border-radius: 50%; text-decoration: none;
-}
-.badge--dark  { background: var(--color-ink); color: var(--color-white); }
-.badge--light { background: var(--color-bg);  color: var(--color-ink); }
-
-.badge__ring { position: absolute; inset: 0; width: 100%; height: 100%; animation: badge-spin 14s linear infinite; }
-.badge__text { fill: currentColor; font: 600 8px var(--font-body); }
-@keyframes badge-spin { to { transform: rotate(360deg); } }
-
-.badge__core {
-  display: grid; place-content: center; width: 58%; aspect-ratio: 1; border-radius: 50%;
-  background: var(--color-accent); color: var(--color-ink); text-align: center; line-height: 1;
-  transition: background-color .25s, color .25s;
-}
-.badge__value   { font: 400 clamp(1rem, 2.2vw, 1.6rem) / 1 var(--font-display); }
-.badge__caption { font-size: .5rem; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; }
-.badge__icon    { width: clamp(1.1rem, 2.6vw, 1.6rem); height: clamp(1.1rem, 2.6vw, 1.6rem); }
-
-a.badge:hover .badge__core, a.badge:focus-visible .badge__core { background: var(--color-ink); color: var(--color-white); }
-
-@media (prefers-reduced-motion: reduce) { .badge__ring { animation: none; } }

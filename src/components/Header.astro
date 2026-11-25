@@ -1,3 +1,6 @@
+---
+import Button from "./Button.astro";
+---
 <header class="site-header">
   <div class="container">
     <nav class="site-nav" aria-label="Primary">
@@ -37,12 +40,7 @@
       </ul>
     </nav>
     <div class="mobile-menu__footer">
-      <a class="btn btn--primary" href="/login">
-        Login
-        <span class="btn__icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-        </span>
-      </a>
+      <Button href="/login">Login</Button>
       <ul class="mobile-menu__socials" role="list">
         <li><a class="mobile-menu__social-link" href="#">Instagram</a></li>
         <li><a class="mobile-menu__social-link" href="#">TikTok</a></li>

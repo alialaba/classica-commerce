@@ -1,3 +1,6 @@
+---
+import Button from "./Button.astro";
+---
 <section class="join" id="join" aria-labelledby="join-title">
   <div class="container">
     <div class="join__banner">
@@ -19,12 +22,7 @@
 
       <!-- cream "tab" cut into the bottom-right corner; ::before/::after draw the curved inner corners -->
       <div class="join__cta">
-        <a class="btn btn--primary" href="#product">
-          Shop now
-          <span class="btn__icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-          </span>
-        </a>
+        <Button href="#product">Shop now</Button>
       </div>
     </div>
   </div>

@@ -1,3 +1,6 @@
+---
+import Badge from "./Badge.astro";
+---
 <section class="best-outfit" aria-labelledby="best-outfit-title">
   <div class="container">
     <div class="best-outfit__card">
@@ -19,17 +22,9 @@
         <p class="best-outfit__text" data-anim>We provide the best outfit to help you express your identity. Reflect who you are.</p>
       </div>
  
-      <a class="badge badge--light best-outfit__badge" data-anim href="#collection" aria-label="Shop the summer sale">
-        <svg class="badge__ring" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
-          <defs><path id="badge-path-outfit" d="M50,50 m-37,0 a37,37 0 1,1 74,0 a37,37 0 1,1 -74,0"/></defs>
-          <text class="badge__text">
-            <textPath href="#badge-path-outfit" textLength="230" lengthAdjust="spacing">SUMMER SALE • SUMMER SALE • SUMMER SALE •</textPath>
-          </text>
-        </svg>
-        <span class="badge__core" aria-hidden="true">
-          <svg class="badge__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg>
-        </span>
-      </a>
+      <div class="best-outfit__badge" data-anim>
+        <Badge id="outfit-badge" variant="light" href="#collection" label="Shop the summer sale" />
+      </div>
     </div>
   </div>
 </section>
