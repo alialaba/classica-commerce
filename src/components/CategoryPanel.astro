@@ -1,0 +1,173 @@
+---
+const categories = [
+  "All collection",
+  "Summer collection",
+  "Best seller",
+  "Winter collection",
+  "New arrivals",
+  "Collaboration",
+];
+---
+<section class="category-panel" id="collection" aria-labelledby="category-panel-title">
+  <div class="container">
+    <div class="category-panel__box">
+
+      <div class="category-panel__promo">
+        <h2 class="category-panel__title" id="category-panel-title">
+          <span class="category-panel__title-line">Classic
+            <svg class="category-panel__mark" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+              <circle cx="12" cy="12" r="12" fill="currentColor"/>
+              <path d="M12 5v14M5 12h14M7 7l10 10M17 7 7 17" stroke="#EF5A28" stroke-width="2.2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <span class="category-panel__title-line">Neutrals</span>
+        </h2>
+        <div class="category-panel__promo-footer">
+          <p class="category-panel__promo-text">Your desired product for your essential style</p>
+          <a class="category-panel__intro-link" href="#join">Watch our intro</a>
+        </div>
+      </div>
+
+      <img class="category-panel__duo"
+           src="/images/category-duo.webp" width="960" height="638" loading="lazy" decoding="async"
+           alt="Two friends sitting on the floor in matching pastel and green hoodie tracksuits">
+
+      <div class="category-panel__feature">
+        <img class="category-panel__feature-img"
+             src="/images/category-neutrals.webp" width="960" height="1350" loading="lazy" decoding="async"
+             alt="Man in a red beanie and a camel wool overshirt over a cream turtleneck">
+        <span class="category-panel__watermark" aria-hidden="true">Neutrals</span>
+      </div>
+
+      <nav class="category-panel__categories" aria-labelledby="category-panel-nav-title">
+        <h3 class="category-panel__nav-title" id="category-panel-nav-title">Explore our categories</h3>
+        <div class="stripes category-panel__stripes" aria-hidden="true"></div>
+        <ul class="category-panel__pills" role="list">
+          {categories.map((label) => (
+            <li><a class="category-panel__pill" href="#">{label}</a></li>
+          ))}
+        </ul>
+      </nav>
+
+    </div>
+  </div>
+</section>
+
+<style>
+.category-panel { padding-bottom: var(--section-pad-y); }
+
+/* ---- the black rounded box: mobile = one column, tablet = 2 columns, desktop = 3 ---- */
+.category-panel__box {
+  display: grid; gap: var(--gap-grid);
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "promo" "feature" "duo" "cats";
+  padding: clamp(.75rem, 1.8vw, 1.5rem);
+  border-radius: 2rem;
+  background: var(--color-ink); color: var(--color-white);
+}
+.category-panel__box :focus-visible { outline-color: var(--color-white); }
+
+/* ---- orange promo card ---- */
+.category-panel__promo {
+  grid-area: promo;
+  container-type: inline-size;            /* title scales with the card, not the viewport */
+  display: flex; flex-direction: column; justify-content: space-between; gap: 2rem;
+  aspect-ratio: 450 / 356;                /* acts as a minimum: content can still make it taller */
+  padding: clamp(1.25rem, 2.4vw, 1.9rem);
+  border-radius: var(--radius-card);
+  background: var(--color-accent); color: var(--color-ink);   /* ink on accent: white fails AA */
+}
+.category-panel__promo :focus-visible { outline-color: var(--color-ink); }
+.category-panel__title {
+  margin: 0;
+  font: 400 clamp(2.5rem, 12vw, 4.5rem)/.95 var(--font-display); text-transform: uppercase;
+}
+@supports (font-size: 1cqi) {
+  .category-panel__title { font-size: calc(100cqi / 4.3); }
+}
+.category-panel__title-line { display: flex; align-items: center; gap: .2em; }
+.category-panel__mark { width: .42em; height: .42em; margin-top: .25em; flex: none; color: var(--color-ink); }
+
+.category-panel__promo-footer {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 1rem;
+}
+.category-panel__promo-text {
+  max-width: 17ch; margin: 0;
+  font: 500 .8rem/1.55 var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+}
+.category-panel__intro-link {
+  display: inline-flex; align-items: center; min-height: 3rem; padding-inline: 1.4rem;
+  border-radius: var(--radius-pill); background: var(--color-ink); color: var(--color-white);
+  text-decoration: none; white-space: nowrap;
+  font: 600 .75rem/1 var(--font-body); letter-spacing: .04em; text-transform: uppercase;
+  transition: background-color .25s, color .25s;
+}
+.category-panel__intro-link:hover { background: var(--color-white); color: var(--color-ink); }
+
+/* ---- photos ---- */
+.category-panel__duo {
+  grid-area: duo;
+  width: 100%; height: auto; aspect-ratio: 450 / 299; object-fit: cover;
+  border-radius: var(--radius-card); background: var(--color-card-bg);
+}
+.category-panel__feature {
+  grid-area: feature;
+  position: relative; overflow: hidden; container-type: inline-size;
+  aspect-ratio: 3 / 4;                    /* mobile only; on wider screens the grid row sets the height */
+  border-radius: var(--radius-card); background: var(--color-card-bg);
+}
+.category-panel__feature-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.category-panel__watermark {             /* outlined word across the photo */
+  position: absolute; top: 25%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-25deg);
+  color: transparent; -webkit-text-stroke: 1.25px rgb(255 255 255 / .9);
+  font: 400 calc(100cqi / 4.6)/1 var(--font-display); text-transform: uppercase; letter-spacing: .02em;
+  white-space: nowrap; pointer-events: none;
+}
+
+/* ---- categories column ---- */
+.category-panel__categories {
+  grid-area: cats;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 1.5rem 1rem;
+  padding: .5rem .25rem .25rem;
+}
+.category-panel__nav-title {
+  margin: 0;
+  font: 500 clamp(1.25rem, 2vw, 1.75rem)/1.2 var(--font-body); text-transform: uppercase;
+}
+.category-panel__stripes { --stripes-w: 5.5rem; --stripes-h: 3.5rem; }
+.category-panel__pills {
+  grid-column: 1 / -1;
+  display: flex; flex-wrap: wrap; align-items: flex-start; gap: .8rem;
+  margin: 0; padding: 0; list-style: none;
+}
+.category-panel__pill {
+  display: inline-flex; align-items: center; min-height: 3rem; padding-inline: 1.4rem;
+  border: 1.5px solid rgb(255 255 255 / .35); border-radius: var(--radius-pill);
+  color: var(--color-white); text-decoration: none; white-space: nowrap;
+  font: 500 .75rem/1 var(--font-body); letter-spacing: .02em; text-transform: uppercase;
+  transition: background-color .25s, color .25s, border-color .25s;
+}
+.category-panel__pill:hover { background: var(--color-white); border-color: var(--color-white); color: var(--color-ink); }
+
+@media (min-width: 40rem) {
+  .category-panel__box {
+    grid-template-columns: repeat(2, minmax(0, 1fr));   /* minmax(0, …): equal columns, the long title can't widen one */
+    grid-template-areas: "promo feature" "duo feature" "cats cats";
+  }
+  .category-panel__feature { aspect-ratio: auto; }
+}
+
+@media (min-width: 60rem) {
+  .category-panel__box {
+    grid-template-columns: minmax(0, 1.8fr) minmax(0, 1.95fr) minmax(0, 1fr);
+    grid-template-areas: "promo feature cats" "duo feature cats";
+  }
+  .category-panel__categories {
+    display: flex; flex-direction: column; align-items: flex-start; gap: 0;
+    padding: .75rem 0 0;
+  }
+  .category-panel__stripes { --stripes-w: 8.5rem; --stripes-h: 8.25rem; margin-top: clamp(2rem, 6vw, 5.5rem); }
+  .category-panel__pills { flex-direction: column; margin-top: auto; padding-top: 2rem; }
+}
+</style>
